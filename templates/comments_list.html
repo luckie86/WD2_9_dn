@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block naslov %} Comments List {% endblock %}
+
+
+{% block vsebina %}
+
+<div class="jumbotron">
+    <h1> Ninja Tech Forum </h1>
+    <p>Welcome to Ninja Tech Forum. Coming soon! </p>
+</div>
+
+
+{% for comment in comments|sort(attribute='created') %}
+    {% for topic in topics %}
+        {% if topic.key.id() == comment.topic_id %}
+ <div class="panel panel-warning">
+        <div class="panel-heading">{{ comment.author_email }} on {{ comment.created.strftime("%d.%m.%Y at %H:%M") }}
+            in topic: <a href="/topic-details/{{topic.key.id()}}"> {{ topic.title }} </a></div>
+        <div class="panel-body">
+            <p>{{ comment.content }}</p>
+        </div>
+ </div>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+
+{% endblock %}

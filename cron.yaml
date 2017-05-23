@@ -1,0 +1,5 @@
+cron:
+- description: Delete topics older than 1 month
+  url: /cron/delete-topics
+  schedule: every Sunday 03:00
+  timezone: Europe/Ljubljana

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block naslov %} Topic Details {% endblock %}
+
+
+{% block vsebina %}
+
+<div class="jumbotron">
+    <h1> Ninja Tech Forum </h1>
+    <p>Welcome to Ninja Tech Forum. Coming soon! </p>
+</div>
+
+<div class="panel panel-info">
+  <div class="panel-heading">{{ topic.title }}</div>
+    <div class="panel-body">
+        <p>{{ topic.content }}</p>
+    </div>
+  <table class="table">
+      <tr>
+          <th> Topic Author:</th>
+          <th> Topic Created:</th>
+          <th> Topic Updated:</th>
+          <th> Topic Delete:</th>
+          <th> Topic Subscribe:</th>
+      </tr>
+      <tr>
+          <td>{{ topic.author_email }}</td>
+          <td>{{ topic.created }}</td>
+          <td>{{ topic.updated }}</td>
+          <td>
+              {% if user %}
+                {% if topic.author_email == user.email() or user.admin %}
+                    <form action="/topic/{{topic.key.id()}}/delete" method="post">
+                        <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+                        <button class="btn btn-danger">Delete topic</button>
+                    </form>
+                {% endif %}
+              {% endif %}
+          </td>
+            <td> <form action="/topic/{{topic.key.id()}}/subscribe" method="post">
+                        <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+                        <button class="btn btn-info">Subscribe</button>
+                </form>
+            </td>
+      </tr>
+  </table>
+</div>
+
+{% for comment in comments|sort(attribute='created') %}
+
+    <div class="panel panel-warning">
+        <div class="panel-heading">{{ comment.author_email }} on {{ comment.created.strftime("%d.%m.%Y at %H:%M") }}</div>
+        <div class="panel-body">
+            <p>{{ comment.content }}</p>
+        </div>
+    </div>
+
+{% endfor %}
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <form action="/topic-details/{{topic.key.id()}}/comment/add" method="post" >
+                <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+
+                <div class="form-group">
+                    <label>Comment</label>
+                    <textarea name="comment" class="form-control" rows="2" required>
+                    </textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}
