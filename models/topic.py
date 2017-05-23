@@ -9,6 +9,7 @@ class Topic(ndb.Model):
     updated = ndb.DateTimeProperty(auto_now=True)
     deleted = ndb.BooleanProperty(default=False)
     subscribers = ndb.StringProperty(repeated=True)
+    subscribers_to_forum = ndb.StringProperty(repeated=True)
 
     @staticmethod
     def create(title, text, user):

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block naslov %} Subscribe {% endblock %}
+
+
+{% block vsebina %}
+
+<div class="jumbotron">
+    <h1> Ninja Tech Forum </h1>
+    <p>Welcome to Ninja Tech Forum. Coming soon! </p>
+</div>
+
+
+<h1> Subscribe to Forum</h1>
+<p> Subscribe and receive the hottest topics in your email!</p>
+    <form method="post" action="/subscribe">
+        <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+        <button class="btn btn-success btn"> Subscribe Here! </button>
+    </form>
+
+{% endblock %}
