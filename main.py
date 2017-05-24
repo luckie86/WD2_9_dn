@@ -5,7 +5,8 @@ import webapp2
 from handlers.topics import TopicAddHandler, TopicDetailsHandler
 from handlers.base import BaseHandler, MainHandler, CookieAlertHandler
 from handlers.comments import CommentAddHandler, CommentsListHandler, CommentDeleteHandler
-from handlers.topics import TopicDelete, SubscribeToTopicHandler, SubscribeToForumHandler
+from handlers.topics import TopicDelete, SubscribeToTopicHandler
+from handlers.subscribe_to_forum import SubscribeToForumHandler
 from tasks.email_new_comment import EmailNewCommentWorker
 from crons.delete_topics import DeleteTopicsCron
 from crons.subscribe_to_forum import SubscribeToForumCron

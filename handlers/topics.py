@@ -52,20 +52,3 @@ class SubscribeToTopicHandler(BaseHandler):
         topic.subscribers.append(current_user_email)
         topic.put()
         return self.write("You are successfully subscribed to topic: %s " % topic.title)
-
-
-class SubscribeToForumHandler(BaseHandler):
-    def get(self):
-        return self.render_template_with_csrf("subscribe_to_forum.html")
-
-    @validate_csrf
-    def post(self):
-        user = users.get_current_user()
-        if not user:
-            return self.write("You're not logged in.")
-        current_user_email = user.email()
-        topics = Topic.query().fetch()
-        for topic in topics:
-            topic.subscribers_to_forum.append(current_user_email)
-            topic.put()
-        return self.redirect("/")
