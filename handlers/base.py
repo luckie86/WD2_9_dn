@@ -52,6 +52,8 @@ class BaseHandler(webapp2.RequestHandler):
 
         user = users.get_current_user()
         if user:
+            if users.is_current_user_admin():
+                user.admin = True
             params["logout_url"] = users.create_logout_url("/")
             params["user"] = user
         else:

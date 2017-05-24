@@ -8,3 +8,8 @@ cron:
   url: /cron/subscribe-to-forum
   schedule: every day 06:00
   timezone: Europe/Ljubljana
+
+- description: Delete comments older than 1 month
+  url: /cron/delete-comments
+  schedule: every sunday 09:30
+  timezone: Europe/Ljubljana

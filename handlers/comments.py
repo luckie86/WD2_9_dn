@@ -27,3 +27,14 @@ class CommentsListHandler(BaseHandler):
 
         params = {"comments":comments, "topics": topics}
         return self.render_template("comments_list.html", params=params)
+
+
+class CommentDeleteHandler(BaseHandler):
+    @validate_csrf
+    def post(self, comment_id):
+        comment = Comment.get_by_id(int(comment_id))
+        user = users.get_current_user()
+        if comment.author_email == user.email() or users.is_current_user_admin():
+            comment.deleted = True
+            comment.put()
+        return self.redirect_to("topic-details", topic_id=comment.topic_id)

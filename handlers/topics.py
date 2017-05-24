@@ -68,4 +68,4 @@ class SubscribeToForumHandler(BaseHandler):
         for topic in topics:
             topic.subscribers_to_forum.append(current_user_email)
             topic.put()
-        return self.write("You are successfully subscribed to hottest topics!")
+        return self.redirect("/")
