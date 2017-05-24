@@ -4,7 +4,7 @@ Ninja Tech Forum
 
 # Activity:
 
-9. D.N.:
+9 D.N.:
 
 1. Subscribe to latest topics
 2. Deleting a comment
